@@ -7,11 +7,15 @@ import { StorageService } from '../_services/storage.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  currentUser: any;
+  currentUser: string = "";
+  currentEmail: string = "";
+  roles =[]
 
   constructor(private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser();
+    this.currentEmail = this.storageService.getEmail();
+    this.roles = this.storageService.getRoles();
   }
 }

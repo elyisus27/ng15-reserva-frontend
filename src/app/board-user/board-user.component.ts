@@ -14,9 +14,11 @@ export class BoardUserComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserBoard().subscribe({
       next: data => {
+        
         this.content = data;
       },
       error: err => {
+        
         if (err.error) {
           try {
             const res = JSON.parse(err.error);

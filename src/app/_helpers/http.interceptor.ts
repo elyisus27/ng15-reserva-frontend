@@ -14,15 +14,18 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   constructor(private storageService: StorageService, private eventBusService: EventBusService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    
+    const tok = this.storageService.getToken();
     req = req.clone({
       withCredentials: true,
+      headers: req.headers.set('Authorization', `Bearer ${tok}`)
     });
-
+    
     return next.handle(req).pipe(
       catchError((error) => {
         if (
           error instanceof HttpErrorResponse &&
-          !req.url.includes('auth/signin') &&
+          !req.url.includes('auth/login') &&
           error.status === 401
         ) {
           return this.handle401Error(req, next);
@@ -38,7 +41,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       this.isRefreshing = true;
 
       if (this.storageService.isLoggedIn()) {
-        this.eventBusService.emit(new EventData('logout', null));
+        //this.eventBusService.emit(new EventData('logout', null));
       }
     }
 
