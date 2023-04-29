@@ -22,7 +22,9 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     });
     
     return next.handle(req).pipe(
+      
       catchError((error) => {
+        
         if (
           error instanceof HttpErrorResponse &&
           !req.url.includes('auth/login') &&

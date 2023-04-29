@@ -4,6 +4,10 @@ import { StorageService } from './_services/storage.service';
 import { AuthService } from './_services/auth.service';
 import { EventBusService } from './_shared/event-bus.service';
 
+import { IconSetService } from '@coreui/icons-angular';
+import { iconSubset } from './icons/icon-subset';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,8 +25,12 @@ export class AppComponent {
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
-    private eventBusService: EventBusService
-  ) {}
+    private eventBusService: EventBusService,
+    private iconSetService: IconSetService,
+    private router: Router
+  ) {
+    iconSetService.icons = { ...iconSubset };
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
@@ -50,7 +58,8 @@ export class AppComponent {
         console.log(res);
         this.storageService.clean();
 
-        window.location.reload();
+        this.router.navigate(['login']);
+        //window.location.reload();
       },
       error: err => {
         console.log(err);

@@ -11,13 +11,21 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  
+  {
+    path: 'login', component: LoginComponent, children: [
+      {
+        path: 'base',
+        loadChildren: () =>
+          import('./views/base/base.module').then((m) => m.BaseModule)
+      },]
+  },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 
 @NgModule({

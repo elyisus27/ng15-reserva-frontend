@@ -1,66 +1,102 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <img
-      id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      class="profile-img-card"
-    />
-    <form
-      *ngIf="!isLoggedIn"
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          [(ngModel)]="form.username"
-          required
-          #username="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
-        />
-        <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
-          Username is required!
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-        />
-        <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
-          <div *ngIf="password.errors['required']">Password is required</div>
-          <div *ngIf="password.errors['minlength']">
-            Password must be at least 6 characters
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">
-          Login
-        </button>
-      </div>
-      <div class="form-group">
-        <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger" role="alert">
-          Login failed: {{ errorMessage }}
-        </div>
-      </div>
-    </form>
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col md="8">
+        <c-card-group>
+          <c-card class="p-4">
+            <c-card-body>
+              <!-- <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" /> -->
+              <form cForm *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+                novalidate>
+                <h1>Login</h1>
+                <p class="text-medium-emphasis">Inicia sesión con tu cuenta</p>
 
-    <div class="alert alert-success" *ngIf="isLoggedIn">
+                <c-input-group class="mb-3">
+
+                  <span cInputGroupText> <svg cIcon name="cilUser"></svg> </span>
+                  <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required
+                    #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+                    autoComplete="username" cFormControl placeholder="Username" />
+                  <div *ngIf="username.errors && f.submitted" class="invalid-feedback"></div>
+                </c-input-group>
+
+                <c-input-group class="mb-4">
+                  <span cInputGroupText> <svg cIcon name="cilLockLocked"></svg> </span>
+                  <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required
+                    minlength="6" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+                    autoComplete="current-password" cFormControl placeholder="Password" type="password" />
+                  <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
+                    <div *ngIf="password.errors['required']"></div>
+                    <div *ngIf="password.errors['minlength']"> minimo 6 caracteres </div>
+                  </div>
+                </c-input-group>
+
+                <c-row>
+                  <c-col xs="6">
+                    <button class="px-4" color="primary" class="btn btn-primary btn-block">
+                      Login
+                    </button>
+
+
+
+                  </c-col>
+                  <c-col class="text-right" xs="6">
+
+                    <!-- <button cButton class="px-0" color="link">
+                      Forgot password?
+                    </button> -->
+                  </c-col>
+
+                </c-row>
+
+                <div style="margin: 3%;">
+                  <c-alert (visibleChange)="onVisibleChange($event)" [visible]="visible" [dismissible]="true"
+                    color="danger" class="d-flex align-items-center" style="margin: 20%;">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+                      <use xlink:href="#exclamation-triangle-fill" />
+                    </svg> Error: {{ errorMessage }}
+
+                  </c-alert>
+
+                </div>
+
+
+
+
+
+
+
+
+              </form>
+            </c-card-body>
+          </c-card>
+          <c-card [ngStyle]="{'width.%': 44}" class="text-white bg-primary py-5">
+            <c-card-body class="text-center">
+              <div>
+                <!-- <h2>Sign up</h2>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+                <button [active]="true" cButton class="mt-3" color="primary" routerLink="/register">
+                  Register Now!
+                </button> -->
+              </div>
+            </c-card-body>
+          </c-card>
+        </c-card-group>
+      </c-col>
+    </c-row>
+
+
+
+
+
+
+
+    <!-- <div class="alert alert-success" *ngIf="isLoggedIn">
       Logged in as {{ username }}.
-    </div>
-   
-  </div>
+    </div> -->
+
+  </c-container>
 </div>
