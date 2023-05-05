@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
-const USER_KEY = 'auth-user';
-const API_URL = 'http://localhost:2001/auth/';
-
+import { environment } from '../../environments/environment'
+const API_URL = `${environment.API_URL}/auth/`;
 @Injectable({
   providedIn: 'root',
 })
@@ -13,7 +12,7 @@ export class UserService {
 
 
   getPublicContent(): Observable<any> {
-    return this.http.get(API_URL + 'all', { responseType: 'text' });
+    return this.http.get(`${API_URL} + all`, { responseType: 'text' });
   }
 
   getUserBoard(): Observable<any> {
