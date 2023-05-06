@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       //this.roles = this.storageService.getRoles()
       //this.username = this.storageService.getUser();
 
-      this.router.navigate(['mod']);
+      this.router.navigate(['home/mod']);
     }
   }
 

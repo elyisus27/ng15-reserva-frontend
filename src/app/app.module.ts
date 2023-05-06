@@ -3,8 +3,6 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
@@ -29,17 +27,17 @@ import {
 } from 'ngx-perfect-scrollbar';
 
 // Import routing module
-//import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 // Import app component
-//import { AppComponent } from './app.component';
+import { AppComponent } from './app.component';
 
-// Import containers
-// import {
-//   DefaultFooterComponent,
-//   DefaultHeaderComponent,
-//   DefaultLayoutComponent,
-// } from './containers';
+//Import containers
+import {
+  DefaultFooterComponent,
+  DefaultHeaderComponent,
+  DefaultLayoutComponent,
+} from './containers';
 
 import {
   AvatarModule,
@@ -72,14 +70,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
 
-// const APP_CONTAINERS = [
-//   DefaultFooterComponent,
-//   DefaultHeaderComponent,
-//   DefaultLayoutComponent,
-// ];
+const APP_CONTAINERS = [
+  DefaultFooterComponent,
+  DefaultHeaderComponent,
+  DefaultLayoutComponent,
+];
 
 @NgModule({
-  declarations: [AppComponent, /*...APP_CONTAINERS*/
+  declarations: [AppComponent, ...APP_CONTAINERS,
   LoginComponent,
   RegisterComponent,
   HomeComponent,
