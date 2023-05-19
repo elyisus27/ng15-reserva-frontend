@@ -1,9 +1,12 @@
-<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+<div class="bg-light min-vh-100  background-image">
+
+</div>
+<div class="not-blur">
   <c-container>
     <c-row class="justify-content-center">
       <c-col md="8">
         <c-card-group>
-          <c-card class="p-4">
+          <c-card class="p-4" >
             <c-card-body>
               <!-- <img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" /> -->
               <form cForm *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
@@ -64,24 +67,22 @@
 
 
 
-
-
+                 
+             
 
               </form>
             </c-card-body>
           </c-card>
-          <c-card [ngStyle]="{'width.%': 44}" class="text-white bg-primary py-5">
-            <c-card-body class="text-center">
-              <div>
-                <!-- <h2>Sign up</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <button [active]="true" cButton class="mt-3" color="primary" routerLink="/register">
-                  Register Now!
-                </button> -->
-              </div>
+          <c-card [ngStyle]="{'width.%': 44}" class="text-white bg-green" >
+            <c-card-body class="text-center" >
+              
+                <img src="../../assets/img/brand/LaReserva-logoSquareWhite.svg" class="myfit"/>
+                
+                
+
+
+
+              
             </c-card-body>
           </c-card>
         </c-card-group>

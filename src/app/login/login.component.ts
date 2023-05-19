@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   username="";
   visible=false;
+  imgLogo: string = './assets/img/Caseta.png';
 
   constructor(private authService: AuthService, private storageService: StorageService,private router: Router) { }
 

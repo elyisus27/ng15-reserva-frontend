@@ -9,7 +9,8 @@ label {
 }
 
 .card {
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
+  background-color: #ebedefcc;
   padding: 20px 25px 30px;
   margin: 0 auto 25px;
   margin-top: 50px;
@@ -29,4 +30,33 @@ label {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
+}
+
+.background-image {
+/*background-image: linear-gradient(to top, rgba(0, 0, 0, 0.703), transparent), url(../../assets/img/Caseta.png);*/
+background-image:  url(../../assets/img/Caseta.png);
+background-position:bottom ;
+background-size: cover;
+filter: blur(3px);
+overflow: hidden;
+
+}
+.bg-green{
+  /* background-color: #ebedefcc; */
+  background-color: rgb(19 139 112);
+  
+}
+.not-blur {
+  position: absolute;
+  left: 0vw;
+  right: 0vw;
+  top: 2vw;
+  overflow: hidden;
+  box-sizing: content-box;
+  width: -webkit-fill-available;
+}
+
+.myfit {
+  width:-webkit-fill-available;
+  vertical-align: middle;
 }
