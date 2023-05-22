@@ -1,0 +1,34 @@
+<div #componentEl [ngClass]="dynCls">
+    <input type="hidden" [(ngModel)]="value" />
+    <div class="input-group mb-3 ls-formfield-input">
+        <input #input type="text" [placeholder]="placeholder" [(ngModel)]="selectedText" class="form-control" [disabled]="disabled || !filterable"
+            (focus)="checkFocus()"
+            (focusout)="checkFocus()"
+            (keydown)="inputKeyDown($event)"
+            (keyup)="filterData($event)">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" #btnClear tabindex="-1" *ngIf="selected.length > 0 && !disabled && !readonly && !loading && filterable" (click)="clearSelection()">
+                <span class="fa fa-times"></span>
+            </button>
+            <button *ngIf="!loading" class="btn btn-outline-secondary" #btnExpand tabindex="-1" (click)="expand('all')" [disabled]="disabled || readonly">
+                <span class="fa fa-angle-down"></span>
+            </button>
+            <button *ngIf="loading" class="btn btn-outline-secondary" tabindex="-1" [disabled]="true">
+                <mat-spinner [diameter]="20"></mat-spinner>
+            </button>
+        </div>
+    </div>
+    <div #listContainer class="ls-combolist-container" [ngStyle]="listContainerStyle"  *ngIf="listShowing"  >
+        <ls-list-picker *ngIf="listShowing" [data]="tmpData"
+            [tpl]="itemTpl"
+            [displayField]="displayField"
+            [valueField]="valueField"
+            (onselect)="setSelection($event)"
+            (onkeydown)="inputKeyDown($event)"
+            (onfocus)="checkFocus()"
+            (onfocusout)="checkFocus()">
+        </ls-list-picker>
+        <div class="pagination"></div>
+    </div>
+</div>
+

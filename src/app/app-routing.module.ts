@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+
 import { ProfileComponent } from './profile/profile.component';
-import { BoardUserComponent } from './board-user/board-user.component';
-import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
-import { BoardAdminComponent } from './board-admin/board-admin.component';
+
+import { BoardModeratorComponent } from './views/pages/portal/board-moderator/board-moderator.component';
+
 import { DefaultLayoutComponent } from './containers';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
   // { path: 'home', component: HomeComponent },
@@ -27,22 +28,22 @@ const routes: Routes = [
   {
     path: 'home',
     component: DefaultLayoutComponent,
+    canActivate: [AuthGuard],
     data: {
       title: 'home'
     },
     children: [
       {
         path: 'mod',
-        component: BoardModeratorComponent 
-        // loadChildren: () =>  import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+        component: BoardModeratorComponent ,  //testeando importar un modulo
+        loadChildren: () => import('./views/pages/portal/portal.module').then(m => m.PortalModule),
       },
     ]
   },
   // { path: 'register', component: RegisterComponent },
   // { path: 'profile', component: ProfileComponent },
-  // { path: 'user', component: BoardUserComponent },
   // { path: 'mod', component: BoardModeratorComponent },
-  // { path: 'admin', component: BoardAdminComponent },
+
 ];
 
 @NgModule({
@@ -50,3 +51,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

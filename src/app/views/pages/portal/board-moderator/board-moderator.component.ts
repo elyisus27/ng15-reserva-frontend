@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services/user.service';
+import { UserService } from '../../../../_services/user.service';
 
 @Component({
   selector: 'app-board-moderator',
@@ -8,10 +8,43 @@ import { UserService } from '../_services/user.service';
 })
 export class BoardModeratorComponent implements OnInit {
   content?: string;
+  
+  columns: any[] = [];
+	buttons: any[] = [];
+	actions: any[] = [];
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.columns = [
+      {
+        name: 'cashClientCompanyId',
+        title: 'PORTAL.COMPANY.FIELDS.ID',
+        width: 80,
+      },
+              {
+                  name: 'rfc',
+                  title: 'PORTAL.COMPANY.FIELDS.RFC',
+                  width: 120
+              },
+      {
+        name: 'businessName',
+        title: 'PORTAL.COMPANY.FIELDS.NAME',
+        width: 200,
+      },
+    ];
+
+    this.buttons = [{
+      text: 'PORTAL.COMPANY.NEW_BUTTON',
+      tooltip: 'GENERICS.ACTIONS.CREATE',
+      icon: 'fa fa-plus',
+      fn: () => {
+        //this.create();
+      }
+    }];
+
+
+
     this.userService.getModeratorBoard().subscribe({
       
       next: data => {

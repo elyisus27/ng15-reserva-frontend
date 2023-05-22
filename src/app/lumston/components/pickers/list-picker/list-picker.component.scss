@@ -1,0 +1,40 @@
+// @import "../../../sinci.variables.scss";
+
+::ng-deep {
+    ul.sinci-list-container {
+        padding: 0px;
+        margin: 0px;
+        list-style: none;
+        border-style: solid;
+        border-width: 1px;
+        border-color: var(--primary);
+        // @include box-shadow($dark);
+    
+        li {
+            position: relative;
+            // padding: 0.45rem 0.5rem;
+            background: white;
+            cursor: pointer;
+            text-align: left;
+    
+            button {
+                width: 100%;
+                padding: 0.45rem 0.5rem;
+                background: none;
+                border: none;
+                color: #686868 !important;
+                text-align: left;
+                
+                &:focus {
+                    background-color: var(--primary);
+                    color: white !important;
+                }
+
+                &:hover {
+                    color: var(--primary) !important;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}

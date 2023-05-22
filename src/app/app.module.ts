@@ -2,21 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { BoardAdminComponent } from './board-admin/board-admin.component';
-import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
-import { BoardUserComponent } from './board-user/board-user.component';
-
+import { BoardModeratorComponent } from './views/pages/portal/board-moderator/board-moderator.component';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
-
-
-//testing
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -65,6 +56,8 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { LumstonModule } from './lumston/lumston.module';
+//import { MatButton, MatTooltipModule, MatProgressSpinnerModule } from '@angular/material';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -80,11 +73,8 @@ const APP_CONTAINERS = [
   declarations: [AppComponent, ...APP_CONTAINERS,
   LoginComponent,
   RegisterComponent,
-  HomeComponent,
   ProfileComponent,
-  BoardAdminComponent,
-  BoardModeratorComponent,
-  BoardUserComponent],
+  ],
   imports: [
     FormsModule,
     HttpClientModule,
@@ -115,7 +105,10 @@ const APP_CONTAINERS = [
     ListGroupModule,
     CardModule,
 
-    AlertComponent
+    AlertComponent,
+    //LumstonModule
+    
+
   ],
   providers: [
     {
@@ -131,6 +124,7 @@ const APP_CONTAINERS = [
     //Title
     httpInterceptorProviders
   ],
+
   
   bootstrap: [AppComponent],
 })

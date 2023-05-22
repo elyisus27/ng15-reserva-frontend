@@ -1,0 +1,79 @@
+.ls-pagination {
+    padding: 0.75rem 0rem;
+    border-top: 1px solid var(--dark);
+    display: flex;
+
+    .ls-pagination-controls { 
+        flex: 1;
+
+        .pagination { margin-bottom: 0; }
+
+        li.page-item {
+            margin: 0rem 0.2rem;
+
+            .page-link {
+                border-radius: 0.25rem;
+                min-width: 2.5rem;
+                text-align: center;
+
+                color: var(--primary);
+                background-color: var(--primary-inverse);
+
+                &:hover {
+                    color: var(--primary-hover);
+                    background-color: var(--primary-inverse-hover);
+                }
+
+                &:active {
+                    color: var(--primary-active);
+                    background-color: var(--primary-inverse-active);
+                }
+
+                &:disabled {
+                    background-color: var(--disabled);
+                    color: var(--disabled-inverse)
+                }
+            }
+            
+            &.active .page-link {
+                color: var(--light);
+                background-color: var(--primary);
+                
+                &:hover {
+                    background-color: var(--primary-hover);
+                }
+                
+                &:active {
+                    background-color: var(--primary-active);
+                }
+
+                &:disabled {
+                    background-color: var(--disabled);
+                    color: var(--disabled-inverse)
+                }
+            }
+        }
+    }
+
+    .ls-pagination-info {
+        color: var(--dark);
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 14px;
+        text-align: right;
+
+        select.form-control.page-size-control {
+            display: inline-block;
+            width: auto; height: auto;
+            margin-right: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            
+            color: var(--primary);
+            background-color: var(--primary-inverse);
+        }
+
+        .ls-pagination-span {
+            display: inline-block;
+        }
+    }
+}
