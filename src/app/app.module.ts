@@ -56,7 +56,7 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
-import { LumstonModule } from './lumston/lumston.module';
+
 //import { MatButton, MatTooltipModule, MatProgressSpinnerModule } from '@angular/material';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -106,7 +106,7 @@ const APP_CONTAINERS = [
     CardModule,
 
     AlertComponent,
-    //LumstonModule
+    
     
 
   ],

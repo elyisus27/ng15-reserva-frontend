@@ -9,7 +9,7 @@ const API_URL = `${environment.API_URL}/auth/`;
 })
 export class UserService {
   constructor(private http: HttpClient, private storage: StorageService) { }
-
+  private baseURL = 'https://jsonplaceholder.typicode.com/posts';
 
   getPublicContent(): Observable<any> {
     return this.http.get(`${API_URL} + all`, { responseType: 'text' });
@@ -25,5 +25,9 @@ export class UserService {
 
   getAdminBoard(): Observable<any> {
     return this.http.get(API_URL + 'adm', { responseType: 'text' });
+  }
+
+  getData() {
+    return this.http.get(this.baseURL);
   }
 }
