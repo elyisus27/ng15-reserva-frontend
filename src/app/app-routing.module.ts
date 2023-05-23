@@ -26,16 +26,16 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 
   {
-    path: 'home',
+    path: '',
     component: DefaultLayoutComponent,
     canActivate: [AuthGuard],
-    data: {
-      title: 'home'
-    },
+    // data: {
+    //   title: 'home'
+    // },
     children: [
       {
         path: 'mod',
-        component: BoardModeratorComponent ,  //testeando importar un modulo
+        //component: BoardModeratorComponent ,  //testeando importar un modulo
         loadChildren: () => import('./views/pages/portal/portal.module').then(m => m.PortalModule),
       },
     ]

@@ -2,8 +2,8 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Dashboard',
-    url: '/dashboard',
+    name: 'matTable',
+    url: '/mod/home',
     iconComponent: { name: 'cil-speedometer' },
     badge: {
       color: 'info',
@@ -19,12 +19,12 @@ export const navItems: INavData[] = [
   //   url: '/theme/colors',
   //   iconComponent: { name: 'cil-drop' }
   // },
-  // {
-  //   name: 'Typography',
-  //   url: '/theme/typography',
-  //   linkProps: { fragment: 'someAnchor' },
-  //   iconComponent: { name: 'cil-pencil' }
-  // },
+  {
+    name: 'MatTableTest',
+    url: '/mod/mattabletest',
+    linkProps: { fragment: 'someAnchor' },
+    iconComponent: { name: 'cil-pencil' }
+  },
   // {
   //   name: 'Components',
   //   title: true
