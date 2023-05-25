@@ -12,19 +12,10 @@ import { DefaultLayoutComponent } from './containers';
 import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
-  // { path: 'home', component: HomeComponent },
-  
   {
     path: 'login', component: LoginComponent, 
-    // children: [
-    //   {
-    //     path: 'base',
-    //     loadChildren: () =>
-    //       import('./views/base/base.module').then((m) => m.BaseModule)
-    //   },]
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-
   {
     path: '',
     component: DefaultLayoutComponent,
@@ -35,7 +26,6 @@ const routes: Routes = [
     children: [
       {
         path: 'mod',
-        //component: BoardModeratorComponent ,  //testeando importar un modulo
         loadChildren: () => import('./views/pages/portal/portal.module').then(m => m.PortalModule),
       },
     ]

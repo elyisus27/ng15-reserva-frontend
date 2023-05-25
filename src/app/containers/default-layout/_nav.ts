@@ -2,14 +2,20 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'matTable',
-    url: '/mod/home',
-    iconComponent: { name: 'cil-speedometer' },
-    badge: {
-      color: 'info',
-      text: 'NEW'
-    }
+    name: 'Listado de Colonos',
+    url: '/mod/houseslist',
+    //linkProps: { fragment: 'someAnchor' },
+    iconComponent: { name: 'cil-list-rich' }
   },
+  // {
+  //   name: 'matTable',
+  //   url: '/mod/home',
+  //   iconComponent: { name: 'cil-speedometer' },
+  //   badge: {
+  //     color: 'info',
+  //     text: 'NEW'
+  //   }
+  // },
   // {
   //   title: true,
   //   name: 'Theme'
@@ -19,12 +25,7 @@ export const navItems: INavData[] = [
   //   url: '/theme/colors',
   //   iconComponent: { name: 'cil-drop' }
   // },
-  {
-    name: 'MatTableTest',
-    url: '/mod/mattabletest',
-    linkProps: { fragment: 'someAnchor' },
-    iconComponent: { name: 'cil-pencil' }
-  },
+
   // {
   //   name: 'Components',
   //   title: true

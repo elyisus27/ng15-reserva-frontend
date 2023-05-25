@@ -11,12 +11,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
-
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
-
+import { HousesListComponent } from './components/houses-list/houses-list.component';
 
 @NgModule({
     imports: [
@@ -29,20 +24,20 @@ import { MatInputModule } from '@angular/material/input';
         MatFormFieldModule,
         MatInputModule,
         HttpClientModule,
-        //BrowserAnimationsModule,
-
 
     ],
     declarations: [
 
         TestComponent,
         AvdatatableComponent,
+        HousesListComponent,
 
     ],
     exports: [
 
         TestComponent,
         AvdatatableComponent,
+        HousesListComponent,
         IconModule,
       
     ],

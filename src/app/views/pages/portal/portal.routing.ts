@@ -1,3 +1,4 @@
+import { HousesListComponent } from 'src/app/avanza/components/houses-list/houses-list.component';
 import { AvdatatableComponent } from '../../../avanza/components/avdatatable/avdatatable.component';
 import { TestComponent } from '../../../avanza/components/test/test.component';
 
@@ -7,11 +8,11 @@ export const ROUTES = [{
     children: [
         {
             path: 'home',
-            component: TestComponent,
+            component: HousesListComponent,
         },
         {
-            path: 'mattabletest',
-            component: AvdatatableComponent,
+            path: 'houseslist',
+            component: HousesListComponent,
         },
 
     ]
