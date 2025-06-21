@@ -1,6 +1,7 @@
 import { HousesListComponent } from 'src/app/avanza/components/houses-list/houses-list.component';
-import { AvdatatableComponent } from '../../../avanza/components/avdatatable/avdatatable.component';
+//import { AvdatatableComponent } from '../../../avanza/components/avdatatable/avdatatable.component';
 import { TestComponent } from '../../../avanza/components/test/test.component';
+import { CfeListComponent } from '../cfe/cfe-list/cfe-list.component';
 
 export const ROUTES = [{
     path: '',
@@ -13,6 +14,14 @@ export const ROUTES = [{
         {
             path: 'houseslist',
             component: HousesListComponent,
+        },
+        {
+            path: 'smartdt',
+            component: TestComponent,
+        },
+        {
+            path: 'cfe-list',
+            component: CfeListComponent,
         },
 
     ]

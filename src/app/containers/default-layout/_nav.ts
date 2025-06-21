@@ -7,6 +7,18 @@ export const navItems: INavData[] = [
     //linkProps: { fragment: 'someAnchor' },
     iconComponent: { name: 'cil-list-rich' }
   },
+  {
+    name: 'Probando smartDatatable',
+    url: '/mod/smartdt',
+    //linkProps: { fragment: 'someAnchor' },
+    iconComponent: { name: 'cil-list-rich' }
+  },
+  {
+    name: 'Contratos CFE',
+    url: '/mod/cfe-list',
+    //linkProps: { fragment: 'someAnchor' },
+    iconComponent: { name: 'cil-list-rich' }
+  },
   // {
   //   name: 'matTable',
   //   url: '/mod/home',

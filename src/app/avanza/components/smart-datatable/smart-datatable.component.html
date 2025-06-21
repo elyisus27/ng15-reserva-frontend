@@ -1,0 +1,55 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <span>Resultados</span>
+    <div>
+      <select (change)="onPageSizeChange($event)">
+        <option *ngFor="let size of pageSizeOptions" [value]="size">{{size}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    <table class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th *ngFor="let col of columns" [style.width]="col.width">{{ col.title }}</th>
+          <th *ngIf="actions.length > 0">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of data$ | async" (click)="onRowClick(row)" (dblclick)="onRowDblClick(row)">
+          <td *ngFor="let col of columns">
+            {{ row[col.name] }}
+          </td>
+          <td *ngIf="actions?.length">
+            <div class="d-flex align-items-center gap-2">
+              <button *ngFor="let a of actions" cButton [color]="a.color || 'secondary'" size="sm" [title]="a.tooltip"
+                (click)="a.fn(row)" class="d-flex align-items-center">
+                <svg *ngIf="a.icon" cIcon [name]="a.icon" class="me-1"></svg>
+                <span *ngIf="a.label">{{ a.label }}</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="(loading$ | async)" class="text-center p-3">
+      <div class="spinner-border text-primary"></div>
+    </div>
+  </div>
+
+  <div class="card-footer d-flex justify-content-between align-items-center">
+    <span>Mostrando página {{currentPage}}</span>
+    <nav>
+      <ul class="pagination mb-0">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link" (click)="onPageChange(currentPage - 1)">‹</button>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage * pageSize >= totalItems">
+          <button class="page-link" (click)="onPageChange(currentPage + 1)">›</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

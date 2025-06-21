@@ -1,0 +1,7 @@
+<button class="btn btn-outline-primary mb-2 align-items-center" (click)="updateBalance()">
+Consultar Adeudos CFE
+</button>
+
+
+<smart-datatable [columns]="columns" [url]="'http://localhost:2001/cfe-contract/listPaginated'" [actions]="actions"
+  (rowClick)="handleClick($event)" [pageSize]="50"></smart-datatable>

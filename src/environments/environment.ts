@@ -1,7 +1,5 @@
 export const environment = {
-	// API_URL: "https://backend.citadelta.com" //cloudflare production // solo si me libera el 2001
-	API_URL: "http://localhost:2001", //dev
-	// API_URL: "http://192.168.196.2:2001", //dev/prod LAN only
-
-
+	 
+	//API_URL: "/api", //produccion aws t3.micro, revisar .yaml donde se define nombre de servicio docker (api) y dockerfile pues hace proxy.
+	API_URL: "http://localhost:2001", //dev/prod LAN only
 };

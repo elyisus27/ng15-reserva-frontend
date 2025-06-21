@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 
 import { TestComponent } from './components/test/test.component';
-import { AvdatatableComponent } from './components/avdatatable/avdatatable.component';
+//import { AvdatatableComponent } from './components/avdatatable/avdatatable.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
@@ -12,11 +12,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { HousesListComponent } from './components/houses-list/houses-list.component';
+import { SmartDatatableComponent } from './components/smart-datatable/smart-datatable.component';
+import { ButtonModule } from '@coreui/angular';
 
 @NgModule({
     imports: [
         CommonModule,
         IconModule,
+        ButtonModule,
 
         MatTableModule,
         MatSortModule,
@@ -29,16 +32,19 @@ import { HousesListComponent } from './components/houses-list/houses-list.compon
     declarations: [
 
         TestComponent,
-        AvdatatableComponent,
+        //AvdatatableComponent,
         HousesListComponent,
+        SmartDatatableComponent,
 
     ],
     exports: [
 
         TestComponent,
-        AvdatatableComponent,
+        //AvdatatableComponent,
+        SmartDatatableComponent,
         HousesListComponent,
         IconModule,
+        ButtonModule
       
     ],
 })

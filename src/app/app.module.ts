@@ -56,6 +56,8 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { CfeListComponent } from './views/pages/cfe/cfe-list/cfe-list.component';
+import { AvanzaModule } from './avanza/avanza.module';
 
 //import { MatButton, MatTooltipModule, MatProgressSpinnerModule } from '@angular/material';
 
@@ -74,6 +76,7 @@ const APP_CONTAINERS = [
   LoginComponent,
   RegisterComponent,
   ProfileComponent,
+  CfeListComponent,
   ],
   imports: [
     FormsModule,
@@ -106,7 +109,7 @@ const APP_CONTAINERS = [
     CardModule,
 
     AlertComponent,
-    
+    AvanzaModule,
     
 
   ],
