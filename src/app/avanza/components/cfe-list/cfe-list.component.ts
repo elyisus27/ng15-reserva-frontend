@@ -1,8 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { DataTableAction } from '../../../../avanza/components/smart-datatable/smart-datatable.interfaces';
-import { IconSubset } from '../../../../icons/icon-subset';
-import { SmartDatatableComponent } from '../../../../avanza/components/smart-datatable/smart-datatable.component';
-import { CfeService } from '../../../../_services/cfe.service';
+import { CfeService } from '../../../_services/cfe.service';
+import { SmartDatatableComponent } from '../smart-datatable/smart-datatable.component';
+import { DataTableAction } from '../smart-datatable/smart-datatable.interfaces';
+
+
+
+
 
 @Component({
   selector: 'app-cfe-list',
@@ -77,6 +80,10 @@ export class CfeListComponent {
   }
 
   updateBalance() {
-
+    this.cfesvc.getPublicContent()
+    this.cfesvc.getPublicContent().subscribe((data: any) => {
+      console.log(data)
+      this.table.reload()
+    });
   }
 }

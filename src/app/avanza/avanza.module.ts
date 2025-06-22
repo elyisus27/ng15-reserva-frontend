@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { HousesListComponent } from './components/houses-list/houses-list.component';
 import { SmartDatatableComponent } from './components/smart-datatable/smart-datatable.component';
 import { ButtonModule } from '@coreui/angular';
+import { CfeListComponent } from './components/cfe-list/cfe-list.component';
 
 @NgModule({
     imports: [
@@ -35,6 +36,7 @@ import { ButtonModule } from '@coreui/angular';
         //AvdatatableComponent,
         HousesListComponent,
         SmartDatatableComponent,
+        CfeListComponent
 
     ],
     exports: [
@@ -43,6 +45,7 @@ import { ButtonModule } from '@coreui/angular';
         //AvdatatableComponent,
         SmartDatatableComponent,
         HousesListComponent,
+        CfeListComponent,
         IconModule,
         ButtonModule
       

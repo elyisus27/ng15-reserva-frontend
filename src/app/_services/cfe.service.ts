@@ -11,6 +11,7 @@ export class CfeService {
   constructor(private http: HttpClient, private storage: StorageService) { }
 
   getPublicContent(): Observable<any> {
+    console.log("peticion")
     return this.http.get(`${API_URL}/update-balance `, { responseType: 'text' });
   }
 
