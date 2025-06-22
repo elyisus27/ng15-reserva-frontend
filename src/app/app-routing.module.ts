@@ -10,6 +10,7 @@ import { BoardModeratorComponent } from './views/pages/portal/board-moderator/bo
 
 import { DefaultLayoutComponent } from './containers';
 import { AuthGuard } from './_guards/auth.guard';
+import { RoleGuard } from './_guards/role.guard';
 
 const routes: Routes = [
   {

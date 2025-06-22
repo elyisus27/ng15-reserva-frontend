@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { CfeService } from '../../../_services/cfe.service';
-import { SmartDatatableComponent } from '../smart-datatable/smart-datatable.component';
-import { DataTableAction } from '../smart-datatable/smart-datatable.interfaces';
+import { SmartDatatableComponent } from '../../../../../avanza/components/smart-datatable/smart-datatable.component';
+import { CfeService } from '../../../../../_services/cfe.service';
+import { DataTableAction } from '../../../../../avanza/components/smart-datatable/smart-datatable.interfaces';
 
 
 

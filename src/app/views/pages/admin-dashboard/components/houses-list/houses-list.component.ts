@@ -2,8 +2,9 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { UserService } from '../../../_services/user.service';
+
 import { HouseService } from 'src/app/_services/house.service';
+import { UserService } from '../../../../../_services/user.service';
 
 export interface UserData {
   id: string;

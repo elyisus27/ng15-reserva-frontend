@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { BoardModeratorComponent } from './views/pages/portal/board-moderator/board-moderator.component';
+import { UnauthorizedComponent } from './views/pages/unauthorized/unauthorized.component';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -58,6 +59,9 @@ import {
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 //import { CfeListComponent } from './views/pages/cfe/cfe-list/cfe-list.component';
 import { AvanzaModule } from './avanza/avanza.module';
+import { AdminDashboardModule } from './views/pages/admin-dashboard/admin-dashboard.module';
+
+
 
 //import { MatButton, MatTooltipModule, MatProgressSpinnerModule } from '@angular/material';
 
@@ -76,6 +80,7 @@ const APP_CONTAINERS = [
   LoginComponent,
   RegisterComponent,
   ProfileComponent,
+  UnauthorizedComponent,
   //CfeListComponent,
   ],
   imports: [
@@ -110,6 +115,7 @@ const APP_CONTAINERS = [
 
     AlertComponent,
     AvanzaModule,
+    AdminDashboardModule,
     
 
   ],
