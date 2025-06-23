@@ -28,7 +28,20 @@ export class LoginComponent implements OnInit {
       //this.roles = this.storageService.getRoles()
       //this.username = this.storageService.getUser();
 
-      this.router.navigate(['mod/home']);
+     // this.router.navigate(['mod/home']);
+     
+     const roles = this.storageService.getUserRoles();
+     // Redirige al usuario según sus roles
+      if (roles.includes('ADMIN-PROFILE')) {
+        this.router.navigate(['/dashboard/admin-board']); // Redirige al panel de admin
+      } else if (roles.includes('GUARD-PROFILE')) { // Asumiendo que GUARD-PROFILE es tu rol de moderador
+        this.router.navigate(['/dashboard/moderator-board']); // Redirige al panel de moderador
+      } else if (roles.includes('USER-PROFILE')) {
+        this.router.navigate(['/dashboard/user-board']); // Redirige al panel de usuario
+      } else {
+        // Si el usuario no tiene ninguno de los roles conocidos, o si no hay un dashboard específico
+        this.router.navigate(['/dashboard']); // Redirige al dashboard principal (que debería redirigir a user-board)
+      }
     }
   }
 

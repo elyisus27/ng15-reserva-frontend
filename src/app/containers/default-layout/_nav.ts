@@ -2,23 +2,53 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Listado de Colonos',
-    url: '/mod/houseslist',
-    //linkProps: { fragment: 'someAnchor' },
-    iconComponent: { name: 'cil-list-rich' }
+    name: 'Dashboard (Usuario)',
+    url: '/dashboard/user-board',
+    iconComponent: { name: 'cil-speedometer' },
+    requiredRoles: ['USER-PROFILE', 'GUARD-PROFILE', 'ADMIN-PROFILE'] // Visible para todos
   },
   {
-    name: 'Probando smartDatatable',
-    url: '/mod/smartdt',
-    //linkProps: { fragment: 'someAnchor' },
-    iconComponent: { name: 'cil-list-rich' }
+    title: true,
+    name: 'Gestión por Rol',
+  },
+  {
+    name: 'Panel de Moderador',
+    url: '/dashboard/moderator-board',
+    iconComponent: { name: 'cil-shield-alt' },
+    requiredRoles: ['GUARD-PROFILE', 'ADMIN-PROFILE'] // Solo moderadores y administradores
+  },
+  {
+    name: 'Listado de Casas',
+    url: '/dashboard/moderator-board/houseslist',
+    iconComponent: { name: 'cil-home' },
+    requiredRoles: ['GUARD-PROFILE', 'ADMIN-PROFILE'] // Visible para moderadores y admins
+  },
+  {
+    name: 'Panel de Administrador',
+    url: '/dashboard/admin-board',
+    iconComponent: { name: 'cil-settings' },
+    requiredRoles: ['ADMIN-PROFILE'] // Solo administradores
   },
   {
     name: 'Contratos CFE',
-    url: '/mod/cfe-list',
-    //linkProps: { fragment: 'someAnchor' },
-    iconComponent: { name: 'cil-list-rich' }
+    url: '/dashboard/admin-board/cfe-list',
+    iconComponent: { name: 'cil-calculator' },
+    requiredRoles: ['ADMIN-PROFILE'] // Visible solo para admins
   },
+  {
+    name: 'Smart Datatable Demo',
+    url: '/dashboard/smartdt',
+    iconComponent: { name: 'cil-grid' },
+    requiredRoles: ['USER-PROFILE', 'GUARD-PROFILE', 'ADMIN-PROFILE']
+  },
+  {
+    name: 'Mi Perfil',
+    url: '/profile',
+    iconComponent: { name: 'cil-user' },
+    requiredRoles: ['USER-PROFILE', 'GUARD-PROFILE', 'ADMIN-PROFILE']
+  },
+  
+  // ... Añade más ítems de navegación aquí con sus respectivos 'requiredRoles'
   // {
   //   name: 'matTable',
   //   url: '/mod/home',
