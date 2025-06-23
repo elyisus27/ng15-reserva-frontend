@@ -1,0 +1,541 @@
+--- Recopilando Información del Proyecto Angular ---
+
+## 1. Estructura de Carpetas (src/app - Nivel 8):
+---------------------------------------------------------
+src/app
+├── _guards
+│   ├── auth.guard.spec.ts
+│   └── auth.guard.ts
+├── _helpers
+│   └── http.interceptor.ts
+├── _services
+│   ├── auth.service.spec.ts
+│   ├── auth.service.ts
+│   ├── cfe.service.ts
+│   ├── house.service.spec.ts
+│   ├── house.service.ts
+│   ├── storage.service.spec.ts
+│   ├── storage.service.ts
+│   ├── user.service.spec.ts
+│   └── user.service.ts
+├── _shared
+│   ├── event-bus.service.spec.ts
+│   ├── event-bus.service.ts
+│   └── event.class.ts
+├── app-routing.module.ts
+├── app.component.css
+├── app.component.spec.ts
+├── app.component.ts
+├── app.module.ts
+├── avanza
+│   ├── avanza.module.ts
+│   └── components
+│       ├── avdatatable
+│       │   ├── avdatatable.component.html
+│       │   ├── avdatatable.component.scss
+│       │   ├── avdatatable.component.spec.ts
+│       │   └── avdatatable.component.ts
+│       ├── cfe-list
+│       │   ├── cfe-list.component.html
+│       │   ├── cfe-list.component.scss
+│       │   ├── cfe-list.component.spec.ts
+│       │   └── cfe-list.component.ts
+│       ├── houses-list
+│       │   ├── houses-list.component.html
+│       │   ├── houses-list.component.scss
+│       │   ├── houses-list.component.spec.ts
+│       │   └── houses-list.component.ts
+│       ├── smart-datatable
+│       │   ├── smart-datatable.component.html
+│       │   ├── smart-datatable.component.scss
+│       │   ├── smart-datatable.component.spec.ts
+│       │   ├── smart-datatable.component.ts
+│       │   └── smart-datatable.interfaces.ts
+│       └── test
+│           ├── test.component.html
+│           └── test.component.ts
+├── containers
+│   ├── default-layout
+│   │   ├── _nav.ts
+│   │   ├── default-footer
+│   │   │   ├── default-footer.component.html
+│   │   │   ├── default-footer.component.scss
+│   │   │   ├── default-footer.component.spec.ts
+│   │   │   └── default-footer.component.ts
+│   │   ├── default-header
+│   │   │   ├── default-header.component.html
+│   │   │   ├── default-header.component.scss
+│   │   │   ├── default-header.component.spec.ts
+│   │   │   └── default-header.component.ts
+│   │   ├── default-layout.component.html
+│   │   ├── default-layout.component.ts
+│   │   └── index.ts
+│   └── index.ts
+├── icons
+│   └── icon-subset.ts
+├── login
+│   ├── login.component.css
+│   ├── login.component.html
+│   ├── login.component.spec.ts
+│   └── login.component.ts
+├── profile
+│   ├── profile.component.css
+│   ├── profile.component.html
+│   ├── profile.component.spec.ts
+│   └── profile.component.ts
+├── register
+│   ├── register.component.css
+│   ├── register.component.html
+│   ├── register.component.spec.ts
+│   └── register.component.ts
+└── views
+    └── pages
+        └── portal
+            ├── board-moderator
+            │   ├── board-moderator.component.css
+            │   ├── board-moderator.component.html
+            │   ├── board-moderator.component.spec.ts
+            │   └── board-moderator.component.ts
+            ├── portal.module.ts
+            └── portal.routing.ts
+
+23 directories, 72 files
+
+## 2. Contenido de Archivos de Enrutamiento (*routing.module.ts y *routing.ts):
+---------------------------------------------------------
+### Archivo: src/app/views/pages/portal/portal.routing.ts
+import { HousesListComponent } from 'src/app/avanza/components/houses-list/houses-list.component';
+//import { AvdatatableComponent } from '../../../avanza/components/avdatatable/avdatatable.component';
+import { TestComponent } from '../../../avanza/components/test/test.component';
+import { CfeListComponent } from '../../../avanza/components/cfe-list/cfe-list.component';
+
+
+export const ROUTES = [{
+    path: '',
+
+    children: [
+        {
+            path: 'home',
+            component: HousesListComponent,
+        },
+        {
+            path: 'houseslist',
+            component: HousesListComponent,
+        },
+        {
+            path: 'smartdt',
+            component: TestComponent,
+        },
+        {
+            path: 'cfe-list',
+            component: CfeListComponent,
+        },
+
+    ]
+}];
+
+## 3. Contenido de Archivos de Guardia (Guards - *.guard.ts):
+---------------------------------------------------------
+### Archivo: src/app/_guards/auth.guard.ts
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+
+//import { ToastService } from '@app/services/toast/toast.service';
+//import { Logger } from '@app/core';
+import { StorageService } from '../_services/storage.service';
+
+
+@Injectable({ providedIn: 'root' })
+export class AuthGuard implements CanActivate {
+  profile: any;
+  constructor(private storageService: StorageService, private router: Router) { }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    //debugger
+    if (!this.storageService.isLoggedIn()) {
+      this.router.navigate(['/'])
+      return false;
+    }
+    return true;
+  }
+}
+
+
+
+## 4. Contenido de Archivos de Módulo (*.module.ts):
+---------------------------------------------------------
+### Archivo: src/app/app-routing.module.ts
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+
+import { ProfileComponent } from './profile/profile.component';
+
+import { BoardModeratorComponent } from './views/pages/portal/board-moderator/board-moderator.component';
+
+import { DefaultLayoutComponent } from './containers';
+import { AuthGuard } from './_guards/auth.guard';
+
+const routes: Routes = [
+  {
+    path: 'login', component: LoginComponent, 
+  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
+    path: '',
+    component: DefaultLayoutComponent,
+    canActivate: [AuthGuard],
+    // data: {
+    //   title: 'home'
+    // },
+    children: [
+      {
+        path: 'mod',
+        loadChildren: () => import('./views/pages/portal/portal.module').then(m => m.PortalModule),
+      },
+    ]
+  },
+  // { path: 'register', component: RegisterComponent },
+  // { path: 'profile', component: ProfileComponent },
+  // { path: 'mod', component: BoardModeratorComponent },
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+### Archivo: src/app/app.module.ts
+import { NgModule } from '@angular/core';
+import { BrowserModule, Title } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
+import { BoardModeratorComponent } from './views/pages/portal/board-moderator/board-moderator.component';
+import { httpInterceptorProviders } from './_helpers/http.interceptor';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import {
+  PERFECT_SCROLLBAR_CONFIG,
+  PerfectScrollbarConfigInterface,
+  PerfectScrollbarModule,
+} from 'ngx-perfect-scrollbar';
+
+// Import routing module
+import { AppRoutingModule } from './app-routing.module';
+
+// Import app component
+import { AppComponent } from './app.component';
+
+//Import containers
+import {
+  DefaultFooterComponent,
+  DefaultHeaderComponent,
+  DefaultLayoutComponent,
+} from './containers';
+
+import {
+  AvatarModule,
+  BadgeModule,
+  BreadcrumbModule,
+  ButtonGroupModule,
+  ButtonModule,
+  CardModule,
+  DropdownModule,
+  FooterModule,
+  FormModule,
+  GridModule,
+  HeaderModule,
+  ListGroupModule,
+  NavModule,
+  ProgressModule,
+  SharedModule,
+  SidebarModule,
+  TabsModule,
+  UtilitiesModule,
+  
+  
+  AlertComponent
+  
+} from '@coreui/angular';
+
+import { IconModule, IconSetService } from '@coreui/icons-angular';
+//import { CfeListComponent } from './views/pages/cfe/cfe-list/cfe-list.component';
+import { AvanzaModule } from './avanza/avanza.module';
+
+//import { MatButton, MatTooltipModule, MatProgressSpinnerModule } from '@angular/material';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true,
+};
+
+const APP_CONTAINERS = [
+  DefaultFooterComponent,
+  DefaultHeaderComponent,
+  DefaultLayoutComponent,
+];
+
+@NgModule({
+  declarations: [AppComponent, ...APP_CONTAINERS,
+  LoginComponent,
+  RegisterComponent,
+  ProfileComponent,
+  //CfeListComponent,
+  ],
+  imports: [
+    FormsModule,
+    HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    AvatarModule,
+    BreadcrumbModule,
+    FooterModule,
+    DropdownModule,
+    GridModule,
+    HeaderModule,
+    SidebarModule,
+    IconModule,
+    PerfectScrollbarModule,
+    NavModule,
+    ButtonModule,
+    FormModule,
+    UtilitiesModule,
+    ButtonGroupModule,
+    ReactiveFormsModule,
+    SidebarModule,
+    SharedModule,
+    TabsModule,
+    ListGroupModule,
+    ProgressModule,
+    BadgeModule,
+    ListGroupModule,
+    CardModule,
+
+    AlertComponent,
+    AvanzaModule,
+    
+
+  ],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy,
+      
+    },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
+    IconSetService,
+    //Title
+    httpInterceptorProviders
+  ],
+
+  
+  bootstrap: [AppComponent],
+})
+export class AppModule {
+}
+
+### Archivo: src/app/avanza/avanza.module.ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IconModule, IconSetService } from '@coreui/icons-angular';
+
+import { TestComponent } from './components/test/test.component';
+//import { AvdatatableComponent } from './components/avdatatable/avdatatable.component';
+
+import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { HousesListComponent } from './components/houses-list/houses-list.component';
+import { SmartDatatableComponent } from './components/smart-datatable/smart-datatable.component';
+import { ButtonModule } from '@coreui/angular';
+import { CfeListComponent } from './components/cfe-list/cfe-list.component';
+
+@NgModule({
+    imports: [
+        CommonModule,
+        IconModule,
+        ButtonModule,
+
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatFormFieldModule,
+        MatInputModule,
+        HttpClientModule,
+
+    ],
+    declarations: [
+
+        TestComponent,
+        //AvdatatableComponent,
+        HousesListComponent,
+        SmartDatatableComponent,
+        CfeListComponent
+
+    ],
+    exports: [
+
+        TestComponent,
+        //AvdatatableComponent,
+        SmartDatatableComponent,
+        HousesListComponent,
+        CfeListComponent,
+        IconModule,
+        ButtonModule
+      
+    ],
+})
+export class AvanzaModule { }
+
+### Archivo: src/app/views/pages/portal/portal.module.ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { BoardModeratorComponent } from './board-moderator/board-moderator.component'
+import { AvanzaModule } from '../../../avanza/avanza.module';
+import { RouterModule } from '@angular/router';
+import {ROUTES} from './portal.routing'
+
+
+
+@NgModule({
+  declarations: [BoardModeratorComponent],
+  imports: [
+    CommonModule,
+    AvanzaModule,
+    RouterModule.forChild(ROUTES),
+  ]
+})
+
+export class PortalModule {
+ 
+}
+
+### Archivo: src/components/docs-components.module.ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+import { CalloutModule, NavModule, TabsModule, UtilitiesModule } from '@coreui/angular';
+import { IconModule } from '@coreui/icons-angular';
+import { DocsExampleComponent } from './docs-example/docs-example.component';
+import { DocsLinkComponent } from './docs-link/docs-link.component';
+import { DocsCalloutComponent } from './docs-callout/docs-callout.component';
+
+@NgModule({
+  declarations: [
+    DocsExampleComponent,
+    DocsLinkComponent,
+    DocsCalloutComponent
+  ],
+  exports: [
+    DocsExampleComponent,
+    DocsLinkComponent,
+    DocsCalloutComponent
+  ],
+  imports: [
+    CommonModule,
+    NavModule,
+    IconModule,
+    RouterModule,
+    TabsModule,
+    UtilitiesModule,
+    CalloutModule
+  ]
+})
+export class DocsComponentsModule {
+}
+
+
+## 5. Posibles Archivos de Servicio de Autenticación (AuthService, LoginService, etc.):
+---------------------------------------------------------
+### Archivo: src/app/_services/auth.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment'
+const AUTH_API = `${environment.API_URL}/auth/`;
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  constructor(private http: HttpClient) { }
+
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(AUTH_API + 'login', { username, password, }, httpOptions
+    );
+  }
+
+  register(username: string, email: string, password: string): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'signup',
+      {
+        username,
+        email,
+        password,
+      },
+      httpOptions
+    );
+  }
+
+  logout(): Observable<any> {
+    return this.http.post(AUTH_API + 'logout', {}, httpOptions);
+  }
+}
+
+### Archivo: src/app/_services/user.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { StorageService } from './storage.service';
+import { environment } from '../../environments/environment'
+const API_URL = `${environment.API_URL}/auth/`;
+@Injectable({
+  providedIn: 'root',
+})
+export class UserService {
+  constructor(private http: HttpClient, private storage: StorageService) { }
+
+  getPublicContent(): Observable<any> {
+    return this.http.get(`${API_URL} + all`, { responseType: 'text' });
+  }
+
+  getUserBoard(): Observable<any> {
+    return this.http.get(API_URL + 'usr', { responseType: 'text' });
+  }
+
+  getModeratorBoard(): Observable<any> {
+    return this.http.get(API_URL + 'mod', { responseType: 'text' });
+  }
+
+  getAdminBoard(): Observable<any> {
+    return this.http.get(API_URL + 'adm', { responseType: 'text' });
+  }
+
+}
+
+

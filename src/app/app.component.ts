@@ -37,7 +37,7 @@ export class AppComponent {
     if (this.isLoggedIn) {
       //debugger
       
-      this.roles = this.storageService.getRoles();
+      this.roles = this.storageService.getUserRoles();
       this.showAdminBoard = this.roles.includes('ADMIN-PROFILE');
       this.showModeratorBoard = this.roles.includes('GUARD-PROFILE');
 

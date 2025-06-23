@@ -16,6 +16,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser();
     this.currentEmail = this.storageService.getEmail();
-    this.roles = this.storageService.getRoles();
+    this.roles = this.storageService.getUserRoles();
   }
 }

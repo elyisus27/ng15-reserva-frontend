@@ -11,10 +11,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { HousesListComponent } from './components/houses-list/houses-list.component';
+
 import { SmartDatatableComponent } from './components/smart-datatable/smart-datatable.component';
 import { ButtonModule } from '@coreui/angular';
-import { CfeListComponent } from './components/cfe-list/cfe-list.component';
+
 
 @NgModule({
     imports: [
@@ -34,9 +34,9 @@ import { CfeListComponent } from './components/cfe-list/cfe-list.component';
 
         TestComponent,
         //AvdatatableComponent,
-        HousesListComponent,
+        
         SmartDatatableComponent,
-        CfeListComponent
+        
 
     ],
     exports: [
@@ -44,8 +44,8 @@ import { CfeListComponent } from './components/cfe-list/cfe-list.component';
         TestComponent,
         //AvdatatableComponent,
         SmartDatatableComponent,
-        HousesListComponent,
-        CfeListComponent,
+        
+        
         IconModule,
         ButtonModule
       

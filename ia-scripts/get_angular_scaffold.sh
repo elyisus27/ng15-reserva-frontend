@@ -19,9 +19,10 @@ print_directory_structure() {
 
 # Función para imprimir el contenido de archivos relevantes
 print_module_files() {
-    echo "## 2. Contenido de Archivos de Enrutamiento (*routing.module.ts):"
+    echo "## 2. Contenido de Archivos de Enrutamiento (*routing.module.ts y *routing.ts):"
     echo "---------------------------------------------------------"
-    find src -name "*-routing.module.ts" -exec sh -c '
+    # Modificación aquí: Añadir la condición -o -name "*routing.ts"
+    find src -name "*-routing.module.ts" -o -name "*routing.ts" -exec sh -c '
         echo "### Archivo: {}"
         cat "{}"
         echo ""

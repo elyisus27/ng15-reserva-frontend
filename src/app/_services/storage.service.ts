@@ -26,7 +26,7 @@ export class StorageService {
     return username;
   }
 
-  public getRoles(): any {
+  public getUserRoles(): any {
     if (!this.isLoggedIn()) {
       return null;
     }

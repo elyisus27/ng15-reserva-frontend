@@ -1,0 +1,145 @@
+README: Protección por Roles y Estructura de Vistas
+Este documento es una guía concisa para entender la implementación de la protección de rutas basada en roles y la organización de componentes de vista en tu proyecto Angular.
+
+1. Objetivo Clave
+El propósito es establecer un sistema robusto para:
+
+Proteger rutas específicas: houses-list solo para moderadores y administradores, y cfe-list solo para administradores.
+Definir componentes "Board" por rol: board-user, board-moderator, y board-admin.
+Centralizar las vistas por rol en views/pages/portal.
+Crear una navegación dinámica (_nav.ts) que se ajuste al rol del usuario logueado.
+2. Estructura de Directorios Clave
+Así es como se organiza el proyecto para el manejo de roles y vistas:
+
+src/app
+├── _guards
+│   └── auth.guard.ts           <-- Lógica central de verificación de roles.README: Protección por Roles y Estructura de Vistas
+Este documento es una guía concisa para entender la implementación de la protección de rutas basada en roles y la organización de componentes de vista en tu proyecto Angular.
+
+1. Objetivo Clave
+El propósito es establecer un sistema robusto para:
+
+Proteger rutas específicas: houses-list solo para moderadores y administradores, y cfe-list solo para administradores.
+Definir componentes "Board" por rol: board-user, board-moderator, y board-admin.
+Centralizar las vistas por rol en views/pages/portal.
+Crear una navegación dinámica (_nav.ts) que se ajuste al rol del usuario logueado.
+2. Estructura de Directorios Clave
+Así es como se organiza el proyecto para el manejo de roles y vistas:
+
+src/app
+├── _guards
+│   └── auth.guard.ts           <-- Lógica central de verificación de roles.
+├── _services
+│   └── storage.service.ts      <-- Almacena y provee los roles del usuario.
+├── containers
+│   └── default-layout
+│       ├── _nav.ts             <-- Define ítems de navegación con requisitos de rol.
+│       └── default-layout.component.ts  <-- Contiene la lógica para mostrar el menú por rol.
+├── avanza
+│   └── avanza.module.ts        <-- Módulo para componentes "smart" o reutilizables (no específicos de un rol de vista).
+├── views
+│   └── pages
+│       └── portal
+│           ├── board-admin             <-- NUEVA ubicación para la vista de Administrador.
+│           ├── board-moderator
+│           ├── board-user              <-- NUEVA ubicación para la vista de Usuario general.
+│           ├── cfe-list                <-- UBICACIÓN para la vista específica de CFE.
+│           ├── houses-list             <-- UBICACIÓN para la vista específica de Casas.
+│           ├── portal.module.ts        <-- Declara todos los componentes del portal.
+│           └── portal.routing.ts       <-- Define rutas y sus protecciones de rol.
+3. Guía de Implementación para Nuevos Componentes y Rutas
+Cuando crees nuevos componentes de vista o rutas con protección por rol, sigue estos pasos:
+
+StorageService (src/app/_services/storage.service.ts):
+
+Asegúrate de que saveUser() guarde correctamente los roles del usuario.
+Utiliza getUserRoles() para acceder a ellos.
+AuthGuard (src/app/_guards/auth.guard.ts):
+
+En el método canActivate(), el guardia verifica primero la autenticación (isLoggedIn()).
+Luego, lee los roles requeridos de la configuración de la ruta (route.data['roles']).
+Compara los roles del usuario con los de la ruta. Si no hay permiso, redirige a una ruta de "acceso denegado" (ej., /access-denied).
+Módulos (portal.module.ts, avanza.module.ts):
+
+Componentes de Vista por Rol: Crea nuevos componentes de vista específicos de rol directamente bajo src/app/views/pages/portal/ (ej., para el board de un nuevo rol o una vista específica). Decláralos en portal.module.ts.
+Componentes Reutilizables: Si un componente es genérico y no está ligado a un rol específico, créalo en src/app/avanza/components/ y decláralo en avanza.module.ts.
+Rutas (portal.routing.ts, app-routing.module.ts):
+
+En portal.routing.ts:
+Define las rutas para tus "boards" ('user-board', 'moderator-board', 'admin-board') y las vistas específicas (ej., 'houseslist', 'cfe-list') como hijas de los respectivos boards.
+Aplica el AuthGuard a cada ruta que necesite protección, usando la propiedad data: { roles: ['rol1', 'rol2'] }. Por ejemplo:
+TypeScript
+
+{
+  path: 'moderator-board',
+  component: BoardModeratorComponent,
+  data: { roles: ['moderator', 'admin'] },
+  children: [
+    {
+      path: 'houseslist',
+      component: HousesListComponent,
+    }
+  ]
+}
+En app-routing.module.ts: La ruta base ('') que carga DefaultLayoutComponent debe usar el AuthGuard general para asegurar que el usuario esté logueado antes de acceder a cualquier funcionalidad del portal. El PortalModule se carga perezosamente (ej. en la ruta /dashboard).
+Navegación (_nav.ts, default-layout.component.ts):
+
+En _nav.ts: Añade una propiedad requiredRoles: string[] a cada ítem del menú de navegación para indicar qué roles pueden verlo.
+En default-layout.component.ts (y su HTML): Inyecta el StorageService, obtiene los roles del usuario logueado, y utiliza una lógica condicional para renderizar los ítems del menú basándose en la propiedad requiredRoles del _nav.ts.
+├── _services
+│   └── storage.service.ts      <-- Almacena y provee los roles del usuario.
+├── containers
+│   └── default-layout
+│       ├── _nav.ts             <-- Define ítems de navegación con requisitos de rol.
+│       └── default-layout.component.ts  <-- Contiene la lógica para mostrar el menú por rol.
+├── avanza
+│   └── avanza.module.ts        <-- Módulo para componentes "smart" o reutilizables (no específicos de un rol de vista).
+├── views
+│   └── pages
+│       └── portal
+│           ├── board-admin             <-- NUEVA ubicación para la vista de Administrador.
+│           ├── board-moderator
+│           ├── board-user              <-- NUEVA ubicación para la vista de Usuario general.
+│           ├── cfe-list                <-- UBICACIÓN para la vista específica de CFE.
+│           ├── houses-list             <-- UBICACIÓN para la vista específica de Casas.
+│           ├── portal.module.ts        <-- Declara todos los componentes del portal.
+│           └── portal.routing.ts       <-- Define rutas y sus protecciones de rol.
+3. Guía de Implementación para Nuevos Componentes y Rutas
+Cuando crees nuevos componentes de vista o rutas con protección por rol, sigue estos pasos:
+
+StorageService (src/app/_services/storage.service.ts):
+
+Asegúrate de que saveUser() guarde correctamente los roles del usuario.
+Utiliza getUserRoles() para acceder a ellos.
+AuthGuard (src/app/_guards/auth.guard.ts):
+
+En el método canActivate(), el guardia verifica primero la autenticación (isLoggedIn()).
+Luego, lee los roles requeridos de la configuración de la ruta (route.data['roles']).
+Compara los roles del usuario con los de la ruta. Si no hay permiso, redirige a una ruta de "acceso denegado" (ej., /access-denied).
+Módulos (portal.module.ts, avanza.module.ts):
+
+Componentes de Vista por Rol: Crea nuevos componentes de vista específicos de rol directamente bajo src/app/views/pages/portal/ (ej., para el board de un nuevo rol o una vista específica). Decláralos en portal.module.ts.
+Componentes Reutilizables: Si un componente es genérico y no está ligado a un rol específico, créalo en src/app/avanza/components/ y decláralo en avanza.module.ts.
+Rutas (portal.routing.ts, app-routing.module.ts):
+
+En portal.routing.ts:
+Define las rutas para tus "boards" ('user-board', 'moderator-board', 'admin-board') y las vistas específicas (ej., 'houseslist', 'cfe-list') como hijas de los respectivos boards.
+Aplica el AuthGuard a cada ruta que necesite protección, usando la propiedad data: { roles: ['rol1', 'rol2'] }. Por ejemplo:
+TypeScript
+
+{
+  path: 'moderator-board',
+  component: BoardModeratorComponent,
+  data: { roles: ['moderator', 'admin'] },
+  children: [
+    {
+      path: 'houseslist',
+      component: HousesListComponent,
+    }
+  ]
+}
+En app-routing.module.ts: La ruta base ('') que carga DefaultLayoutComponent debe usar el AuthGuard general para asegurar que el usuario esté logueado antes de acceder a cualquier funcionalidad del portal. El PortalModule se carga perezosamente (ej. en la ruta /dashboard).
+Navegación (_nav.ts, default-layout.component.ts):
+
+En _nav.ts: Añade una propiedad requiredRoles: string[] a cada ítem del menú de navegación para indicar qué roles pueden verlo.
+En default-layout.component.ts (y su HTML): Inyecta el StorageService, obtiene los roles del usuario logueado, y utiliza una lógica condicional para renderizar los ítems del menú basándose en la propiedad requiredRoles del _nav.ts.
