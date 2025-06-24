@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 // Revisa tus archivos HTML de HousesListComponent y CfeListComponent para ver cuáles más podrías necesitar.
 
 import { ROUTES } from './portal.routing'; // Tus rutas de portal
+import { SpinnerModule } from '@coreui/angular';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ROUTES } from './portal.routing'; // Tus rutas de portal
     MatFormFieldModule,
     MatInputModule,
     // Añade aquí cualquier otro módulo de Material necesario
+     SpinnerModule,
   ],
   // No necesitas exportar estos componentes si solo se usan dentro del PortalModule,
   // pero si algún otro módulo fuera de PortalModule los necesitara, se exportarían aquí.

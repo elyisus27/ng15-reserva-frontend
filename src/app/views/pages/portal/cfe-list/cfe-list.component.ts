@@ -1,7 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CfeService } from '../../../../_services/cfe.service';
 import { SmartDatatableComponent } from '../../../../avanza/components/smart-datatable/smart-datatable.component';
 import { DataTableAction } from '../../../../avanza/components/smart-datatable/smart-datatable.interfaces';
+import { environment } from '../../../../../environments/environment';
 
 
 
@@ -12,78 +13,88 @@ import { DataTableAction } from '../../../../avanza/components/smart-datatable/s
   templateUrl: './cfe-list.component.html',
   styleUrls: ['./cfe-list.component.scss']
 })
-
-
-export class CfeListComponent {
+export class CfeListComponent implements OnInit {
   @ViewChild(SmartDatatableComponent) table!: SmartDatatableComponent;
+
+  isUpdatingBalance: boolean = false;
+  isRegisteringContracts: boolean = false;
+  isLoggingInTelegram: boolean = false; // Nueva flag para el botón de Telegram
 
   constructor(
     private cfesvc: CfeService
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit(): void { }
 
+  url = `${environment.API_URL}/cfe-contract/listPaginated`
   columns = [
     { name: 'contractId', title: 'Id', width: "20px" },
     { name: 'street', title: 'Calles', width: "80px" },
     { name: 'receiptDate', title: 'Recibos', width: "120px" },
-    { name: 'billingPeriod', title: 'Facturacion', width: "120px" },
-    //{ name: 'receiptMonths', title: 'Meses de Recibos' },
-    { name: 'serviceNumber', title: '# Servicio' },
+    { name: 'billingPeriod', title: 'Facturacion', width: "180px" },
+    { name: 'serviceNumber', title: '# Servicio', width: "120px" },
     { name: 'meterNumber', title: 'Medidor' },
-    //{ name: 'clientName', title: 'Cliente' },
     { name: 'paymentDueDate', title: 'Fecha de Pago' },
     { name: 'paymentStatus', title: 'Status Pago' },
     { name: 'total', title: 'Cantidad' },
     { name: 'updatedAt', title: 'Actualizado el' }
   ];
 
-  actions: DataTableAction[] = [
-    // {
-    //   icon: IconSubset.cilPencil,
-    //   tooltip: 'Editar',
-    //   //label: 'Editar',
-    //   color: 'primary',
-    //   fn: (row:any) => this.edit(row)
-    // },
-    // {
-    //   icon: IconSubset.cilTrash,
-    //   tooltip: 'Eliminar',
-    //   //label: 'Eliminar',
-    //   color: 'danger',
-    //   fn: (row:any) => this.delete(row)
-    // },
-    // {
-    //   icon: IconSubset.cilCheck,
-    //   tooltip: 'Activar',
-    //   //label: 'Activar',
-    //   color: 'success',
-    //   fn: (row:any) => this.toggle(row)
-    // }
-  ];
+  actions: DataTableAction[] = [];
 
-  onEdit(row: any) {
-    console.log('Editando', row);
-  }
-
-  onDelete(row: any) {
-    console.log('Eliminando', row);
-  }
-
+  onEdit(row: any) { console.log('Editando', row); }
+  onDelete(row: any) { console.log('Eliminando', row); }
   edit(row: any) { }
   delete(row: any) { }
   toggle(row: any) { }
+  handleClick(event: any) { console.log(event) }
 
-  handleClick(event: any) {
-    console.log(event)
+  updateBalance(): void {
+    this.isUpdatingBalance = true;
+    this.cfesvc.getPublicContent().subscribe({
+      next: (data: any) => {
+        console.log('Datos de adeudos CFE recibidos:', data);
+        if (this.table) { this.table.reload(); }
+      },
+      error: (error: any) => {
+        console.error('Error al actualizar adeudos CFE:', error);
+      },
+      complete: () => {
+        this.isUpdatingBalance = false;
+      }
+    });
   }
 
-  updateBalance() {
-    this.cfesvc.getPublicContent()
-    this.cfesvc.getPublicContent().subscribe((data: any) => {
-      console.log(data)
-      this.table.reload()
+  registerContracts(): void {
+    this.isRegisteringContracts = true;
+    this.cfesvc.registerContracts().subscribe({
+      next: (data: any) => {
+        console.log('Respuesta de registro de contratos CFE:', data);
+        if (this.table) { this.table.reload(); }
+      },
+      error: (error: any) => {
+        console.error('Error al registrar contratos CFE:', error);
+      },
+      complete: () => {
+        this.isRegisteringContracts = false;
+      }
+    });
+  }
+
+  // Nuevo método para simular el inicio de sesión en Telegram
+  loginTelegram(): void {
+    this.isLoggingInTelegram = true;
+    this.cfesvc.initTelegram().subscribe({
+      next: (data: any) => {
+        console.log('Respuesta de registro de contratos CFE:', data);
+        if (this.table) { this.table.reload(); }
+      },
+      error: (error: any) => {
+        console.error('Error al registrar contratos CFE:', error);
+      },
+      complete: () => {
+        this.isLoggingInTelegram = false;
+      }
     });
   }
 }

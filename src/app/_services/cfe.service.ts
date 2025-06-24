@@ -11,10 +11,16 @@ export class CfeService {
   constructor(private http: HttpClient, private storage: StorageService) { }
 
   getPublicContent(): Observable<any> {
-    console.log("peticion")
     return this.http.get(`${API_URL}/update-balance `, { responseType: 'text' });
   }
 
-  
+  registerContracts(): Observable<any> {
+    return this.http.get(`${API_URL}/register-contracts`, { responseType: 'text' });
+  }
+
+  initTelegram(): Observable<any> {
+    return this.http.get(`${API_URL}/init-telegram`, { responseType: 'text' });
+  }
+
 
 }

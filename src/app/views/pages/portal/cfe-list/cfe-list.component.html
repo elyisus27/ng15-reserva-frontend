@@ -1,7 +1,37 @@
-<button class="btn btn-outline-primary mb-2 align-items-center" (click)="updateBalance()">
-Consultar Adeudos CFE
+<button class="btn btn-outline-primary mb-2 align-items-center" (click)="updateBalance()"
+  [disabled]="isUpdatingBalance">
+  <c-spinner *ngIf="isUpdatingBalance" [size]="'sm'" class="me-2" aria-hidden="true"></c-spinner>
+  <!-- Texto del botón según el estado de carga -->
+  {{ isUpdatingBalance ? 'Cargando...' : 'Consultar Adeudos CFE' }}
+
 </button>
+<p>Este boton actualiza los saldos de acuerdo a los contratos que estan registrados en app.micfe.com.mx</p>
 
-
-<smart-datatable [columns]="columns" [url]="'http://localhost:2001/cfe-contract/listPaginated'" [actions]="actions"
+<smart-datatable [columns]="columns" [url]="url" [actions]="actions"
   (rowClick)="handleClick($event)" [pageSize]="50"></smart-datatable>
+
+<!-- Espacio y título para la nueva sección -->
+<div class="mt-5"> <!-- Clase mt-5 de Bootstrap para margen superior -->
+  <h2>Registrar Contratos en app CFE</h2>
+  <p>Para dar de alta los contratos, se lanza un automatismo que consulta saldos en el bot de Telegram
+    **`@cfecontigo`** y con esta información se lanzará un automatismo para registrarlos en `appcfe`.</p>
+
+  <!-- Lista de pasos -->
+  <ul class="list-unstyled">
+    <!-- list-unstyled para quitar viñetas si no las quieres, o quítala para viñetas estándar -->
+    <li class="mb-3 d-flex align-items-center">
+      <button class="btn btn-primary me-2" (click)="loginTelegram()" [disabled]="isLoggingInTelegram">
+        <c-spinner *ngIf="isLoggingInTelegram" [size]="'sm'" class="me-2" aria-hidden="true"></c-spinner>
+        {{ isLoggingInTelegram ? 'Iniciando...' : 'Paso 1.- Telegram web' }}
+      </button>
+      <span>(Abre el bot de Telegram para iniciar sesión con QR)</span>
+    </li>
+    <li class="mb-3 d-flex align-items-center">
+      <button class="btn btn-success me-2" (click)="registerContracts()" [disabled]="isRegisteringContracts">
+        <c-spinner *ngIf="isRegisteringContracts" [size]="'sm'" class="me-2" aria-hidden="true"></c-spinner>
+        {{ isRegisteringContracts ? 'Registrando...' : 'Paso 2.- Registrar Contratos' }}
+      </button>
+      <span>(Lanza el registro de contratos en la app CFE)</span>
+    </li>
+  </ul>
+</div>
