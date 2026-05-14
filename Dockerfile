@@ -1,4 +1,4 @@
-#Forma personalizada. hacer 
+#Forma personalizada. cambiar .env a variable de produccion .envs de build vs .env de runtime
 #ng build
 #docker build . -t jesus2787/ng15-reservafrac:latest
 

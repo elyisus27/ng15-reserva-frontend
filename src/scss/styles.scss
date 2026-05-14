@@ -39,3 +39,109 @@ $enable-rtl: true;
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@media print {
+  @page {
+    size: letter landscape;
+    margin: 0.42in 0.22in;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .cfe-report-header {
+    display: block !important;
+    margin: 0 0 0.06in !important;
+  }
+
+  .cfe-eyebrow,
+  .cfe-description {
+    display: none !important;
+  }
+
+  .cfe-title {
+    color: #000 !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 9pt !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+  }
+
+  .cfe-receipts-report smart-datatable .print-datatable {
+    width: 100%;
+  }
+
+  .cfe-receipts-report smart-datatable .print-datatable table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 9.8pt;
+    line-height: 1.05;
+  }
+
+  .cfe-receipts-report smart-datatable .print-datatable th,
+  .cfe-receipts-report smart-datatable .print-datatable td {
+    border-left: 1.4pt solid #000;
+    border-right: 1.4pt solid #000;
+    border-top: 0;
+    border-bottom: 0;
+    padding: 0.7pt 2pt;
+    vertical-align: middle;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+  .cfe-receipts-report smart-datatable .print-datatable th {
+    height: 30pt;
+    background: #000 !important;
+    color: #fff !important;
+    font-size: 12pt;
+    font-weight: 700;
+    text-align: center;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cfe-receipts-report smart-datatable .print-datatable td {
+    height: 14pt;
+  }
+
+  .cfe-receipts-report smart-datatable .print-datatable tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .cfe-receipts-report smart-datatable .print-datatable tbody tr:nth-child(even) td {
+    background: #eeeeee !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cfe-receipts-report smart-datatable .print-datatable td:first-child,
+  .cfe-receipts-report smart-datatable .print-datatable th:first-child,
+  .cfe-receipts-report smart-datatable .print-datatable td:nth-child(9),
+  .cfe-receipts-report smart-datatable .print-datatable th:nth-child(9) {
+    text-align: center;
+  }
+
+  .cfe-receipts-report smart-datatable .print-datatable td:nth-child(2),
+  .cfe-receipts-report smart-datatable .print-datatable th:nth-child(2) {
+    text-align: left;
+  }
+
+  .cfe-receipts-report smart-datatable .print-datatable td:nth-child(9) {
+    font-weight: 700;
+  }
+
+  .cfe-receipts-report smart-datatable .print-datatable td.col-street {
+    font-weight: 600;
+  }
+
+  .cfe-receipts-report smart-datatable .print-datatable td.col-total {
+    font-weight: 700;
+  }
+}

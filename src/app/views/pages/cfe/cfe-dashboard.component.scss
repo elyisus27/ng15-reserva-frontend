@@ -1,0 +1,305 @@
+$border: #dfe5ec;
+$text-muted: #667085;
+$text-dark: #1f2937;
+$text-label: #344054;
+
+.cfe-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  // Todo en viewport, sin scroll de página
+  height: calc(100vh - 8.5rem);
+  min-height: 600px;
+  overflow: hidden;
+  padding: 0;
+
+  // ── Filtros ──────────────────────────────────────────────────────────────
+  .filters-card { flex: 0 0 auto; }
+
+  .filters-bar {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 0.45rem 0.9rem;
+  }
+
+  .date-field {
+    align-items: center;
+    display: flex;
+    gap: 0.3rem;
+
+    label {
+      color: $text-muted;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    input {
+      border: 1px solid #d0d5dd;
+      border-radius: 6px;
+      color: $text-dark;
+      font-size: 0.8rem;
+      height: 28px;
+      padding: 0 0.4rem;
+    }
+  }
+
+  .date-hint {
+    color: $text-muted;
+    font-size: 0.75rem;
+    &.loading { font-style: italic; }
+  }
+
+  .reload-btn {
+    background: #fff;
+    border: 1px solid #d0d5dd;
+    border-radius: 6px;
+    color: #1f2937;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 600;
+    height: 28px;
+    padding: 0 0.75rem;
+    transition: background 0.15s;
+
+    &:hover:not(:disabled) { background: #f2f4f7; }
+    &:disabled { cursor: not-allowed; opacity: 0.5; }
+  }
+
+  .metric-toggle {
+    background: #f2f4f7;
+    border: 1px solid #d0d5dd;
+    border-radius: 6px;
+    display: flex;
+    padding: 2px;
+    gap: 2px;
+  }
+
+  .metric-btn {
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: #667085;
+    cursor: pointer;
+    font-size: 0.76rem;
+    font-weight: 600;
+    height: 24px;
+    padding: 0 0.65rem;
+    transition: background 0.12s, color 0.12s;
+
+    &.active {
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,.10);
+      color: #1f2937;
+    }
+
+    &:hover:not(.active) { color: #344054; }
+  }
+
+  .date-error {
+    color: #b42318;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  // ── Cards: las dos se reparten el espacio disponible ─────────────────────
+  .chart-card {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  // coreui card-body ocupa el resto de la card
+  .chart-card > .card-body { flex: 1 1 0; min-height: 0; }
+
+  .card-header-row {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: space-between;
+    padding: 0.4rem 0.9rem;
+  }
+
+  .chart-card-body {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0.4rem 0.6rem 0.5rem;
+  }
+
+  // ── Columna del canvas ────────────────────────────────────────────────────
+  .col-canvas {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .chart-placeholder {
+    align-items: flex-start;
+    background: #f8fafc;
+    border: 1px solid $border;
+    border-radius: 8px;
+    display: flex;
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0.4rem 0.4rem 0;
+
+    // El canvas mantiene sus dimensiones internas — NO se escala con CSS
+    // Esto es intencional: evita el desfase de coordenadas en los tooltips
+    canvas {
+      display: block;
+      flex: 0 0 auto;
+    }
+  }
+
+  // ── Columna del selector ──────────────────────────────────────────────────
+  .col-selector {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .selector-panel {
+    border: 1px solid $border;
+    border-radius: 8px;
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0.4rem 0.55rem 0.45rem;
+  }
+
+  .selector-header {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+  }
+
+  .selector-label {
+    color: $text-label;
+    font-size: 0.76rem;
+    font-weight: 700;
+  }
+
+  .toggle-all {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    font-size: 0.7rem;
+    font-weight: 600;
+    gap: 0.25rem;
+    margin: 0;
+  }
+
+  // ── Chips bimestrales: grid 3 col, scroll interno ─────────────────────────
+  .chips-grid {
+    align-content: start;
+    display: grid;
+    gap: 3px;
+    grid-template-columns: repeat(3, 1fr);
+    overflow-y: auto;
+    scrollbar-color: #c1cada transparent;
+    scrollbar-width: thin;
+  }
+
+  .chip {
+    align-items: center;
+    border: 1px solid #edf0f4;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    gap: 4px;
+    margin: 0;
+    padding: 3px 5px;
+
+    &:hover { background: #f2f4f7; }
+
+    input[type="checkbox"] {
+      flex: 0 0 auto;
+      height: 11px;
+      margin: 0;
+      width: 11px;
+    }
+  }
+
+  .chip-inner {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+    min-width: 0;
+
+    strong {
+      color: $text-dark;
+      font-size: 0.64rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    small {
+      color: $text-muted;
+      font-size: 0.57rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  // ── Lista mensuales (3 items, más holgados) ───────────────────────────────
+  .selector-panel--monthly { justify-content: flex-start; }
+
+  .monthly-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow-y: auto;
+  }
+
+  .monthly-row {
+    align-items: center;
+    border: 1px solid #edf0f4;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 7px;
+    margin: 0;
+    padding: 6px 9px;
+
+    &:hover { background: #f2f4f7; }
+
+    input[type="checkbox"] {
+      flex: 0 0 auto;
+      height: 13px;
+      margin: 0;
+      width: 13px;
+    }
+
+    span {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+      min-width: 0;
+    }
+
+    strong {
+      color: $text-dark;
+      font-size: 0.76rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    small {
+      color: $text-muted;
+      font-size: 0.64rem;
+    }
+  }
+}

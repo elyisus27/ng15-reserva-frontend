@@ -1,24 +1,36 @@
-<button class="btn btn-outline-primary mb-2 align-items-center" (click)="updateBalance()"
-  [disabled]="isUpdatingBalance">
-  <c-spinner *ngIf="isUpdatingBalance" [size]="'sm'" class="me-2" aria-hidden="true"></c-spinner>
-  <!-- Texto del botón según el estado de carga -->
-  {{ isUpdatingBalance ? 'Cargando...' : 'Consultar Adeudos CFE' }}
+<section class="cfe-receipts-report">
+  <div class="cfe-report-header">
+    <div>
+      <p class="cfe-eyebrow">Recibos CFE</p>
+      <h1 class="cfe-title">Contratos y adeudos</h1>
+      <p class="cfe-description">
+        Consulta rápida de calle, servicio, estatus y total a pagar.
+      </p>
+    </div>
 
-</button>
-<p>Este boton actualiza los saldos de acuerdo a los contratos que estan registrados en app.micfe.com.mx</p>
+    <div class="cfe-actions no-print">
+      <button class="btn btn-outline-primary align-items-center" (click)="updateBalance()"
+        [disabled]="isUpdatingBalance">
+        <c-spinner *ngIf="isUpdatingBalance" [size]="'sm'" class="me-2" aria-hidden="true"></c-spinner>
+        {{ isUpdatingBalance ? 'Cargando...' : 'Consultar Adeudos CFE' }}
+      </button>
 
-<smart-datatable [columns]="columns" [url]="url" [actions]="actions"
-  (rowClick)="handleClick($event)" [pageSize]="50"></smart-datatable>
+      <button class="btn btn-primary" type="button" (click)="printReceipts()">
+        Imprimir / guardar PDF
+      </button>
+    </div>
+  </div>
 
-<!-- Espacio y título para la nueva sección -->
-<div class="mt-5"> <!-- Clase mt-5 de Bootstrap para margen superior -->
+  <smart-datatable [columns]="columns" [printColumns]="printColumns" [url]="url" [actions]="actions"
+    (rowClick)="handleClick($event)" [pageSize]="50"></smart-datatable>
+</section>
+
+<div class="mt-5 no-print">
   <h2>Registrar Contratos en app CFE</h2>
   <p>Para dar de alta los contratos, se lanza un automatismo que consulta saldos en el bot de Telegram
-    **`@cfecontigo`** y con esta información se lanzará un automatismo para registrarlos en `appcfe`.</p>
+    <strong>@cfecontigo</strong> y con esta información se lanzará un automatismo para registrarlos en appcfe.</p>
 
-  <!-- Lista de pasos -->
   <ul class="list-unstyled">
-    <!-- list-unstyled para quitar viñetas si no las quieres, o quítala para viñetas estándar -->
     <li class="mb-3 d-flex align-items-center">
       <button class="btn btn-primary me-2" (click)="loginTelegram()" [disabled]="isLoggingInTelegram">
         <c-spinner *ngIf="isLoggingInTelegram" [size]="'sm'" class="me-2" aria-hidden="true"></c-spinner>

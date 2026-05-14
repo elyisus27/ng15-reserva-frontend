@@ -1,0 +1,110 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.smart-datatable {
+  overflow: hidden;
+}
+
+.datatable-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table th {
+  padding: 0.35rem 0.5rem;
+  line-height: 1.2;
+}
+
+.table td {
+  padding: 0.35rem 0.5rem;
+  line-height: 1.2;
+  vertical-align: middle;
+}
+
+.print-datatable {
+  display: none;
+}
+
+@media (max-width: 575.98px) {
+  .card-header,
+  .card-footer {
+    align-items: flex-start !important;
+    gap: 0.75rem;
+  }
+
+  .datatable-wrapper {
+    overflow-x: visible;
+  }
+
+  .table {
+    border: 0;
+    margin-bottom: 0;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table tbody {
+    padding: 0.75rem;
+  }
+
+  .table tr {
+    border: 1px solid var(--cui-border-color, #d8dbe0);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    background: var(--cui-body-bg, #fff);
+  }
+
+  .table tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 0;
+    border-bottom: 1px solid var(--cui-border-color, #d8dbe0);
+    text-align: right;
+    word-break: break-word;
+  }
+
+  .table td:last-child {
+    border-bottom: 0;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    flex: 0 0 42%;
+    color: var(--cui-secondary-color, #768192);
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .pagination .page-link {
+    min-width: 2.5rem;
+    text-align: center;
+  }
+}
+
+@media print {
+  .smart-datatable {
+    display: none !important;
+  }
+
+  .print-datatable {
+    display: block;
+  }
+}

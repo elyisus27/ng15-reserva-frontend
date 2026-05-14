@@ -18,6 +18,7 @@ export class SmartDatatableComponent implements OnInit {
   @Input() remote = true;
   @Input() pageSizeOptions: number[] = [10, 25, 50];
   @Input() pageSize = 10;
+  @Input() printColumns: DataTableColumn[] = [];
 
   @Output() rowClick = new EventEmitter<any>();
   @Output() rowDblClick = new EventEmitter<any>();
@@ -28,6 +29,10 @@ export class SmartDatatableComponent implements OnInit {
   currentPage = 1;
 
   constructor(private http: HttpClient) { }
+
+  get printableColumns(): DataTableColumn[] {
+    return this.printColumns.length ? this.printColumns : this.columns;
+  }
 
   ngOnInit() {
     if (this.remote) this.fetchData();
@@ -89,6 +94,11 @@ export class SmartDatatableComponent implements OnInit {
     if (action.fn) action.fn(row);
   }
 
+  displayValue(row: any, col: DataTableColumn): string {
+    if (col.template) return col.template(row);
+    return row[col.name] ?? '';
+  }
+
   isArray(value: any): boolean {
     return Array.isArray(value);
   }
@@ -102,4 +112,3 @@ export class SmartDatatableComponent implements OnInit {
 // };
 
 }
-

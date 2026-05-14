@@ -1,31 +1,40 @@
 
-//import { AvdatatableComponent } from '../../../avanza/components/avdatatable/avdatatable.component';
-import { TestComponent } from '../../../avanza/components/test/test.component';
+import { Routes } from '@angular/router';
 import { CfeListComponent } from './cfe-list/cfe-list.component';
-import { HousesListComponent } from './houses-list/houses-list.component';
 
 
-
-export const ROUTES = [{
+export const ROUTES: Routes = [{
     path: '',
 
     children: [
         {
+            path: '',
+            redirectTo: 'cfe-list',
+            pathMatch: 'full',
+        },
+        {
             path: 'home',
-            component: HousesListComponent,
+            redirectTo: 'cfe-list',
+            pathMatch: 'full',
         },
         {
             path: 'houseslist',
-            component: HousesListComponent,
+            redirectTo: 'cfe-list',
+            pathMatch: 'full',
         },
         {
             path: 'smartdt',
-            component: TestComponent,
+            redirectTo: 'cfe-list',
+            pathMatch: 'full',
         },
         {
             path: 'cfe-list',
-            component: CfeListComponent,
+            component: CfeListComponent
         },
-
+        {
+            path: 'cfe',
+            loadChildren: () =>
+                import('../cfe/cfe.module').then(m => m.CfeModule)
+        }
     ]
 }];

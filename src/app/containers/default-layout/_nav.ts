@@ -2,23 +2,22 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Listado de Colonos',
-    url: '/mod/houseslist',
-    //linkProps: { fragment: 'someAnchor' },
-    iconComponent: { name: 'cil-list-rich' }
-  },
-  {
-    name: 'Probando smartDatatable',
-    url: '/mod/smartdt',
-    //linkProps: { fragment: 'someAnchor' },
-    iconComponent: { name: 'cil-list-rich' }
-  },
-  {
     name: 'Contratos CFE',
     url: '/mod/cfe-list',
     //linkProps: { fragment: 'someAnchor' },
     iconComponent: { name: 'cil-list-rich' }
   },
+  {
+    name: 'CFE Histórico',
+    url: '/mod/cfe',
+    iconComponent: { name: 'cil-speedometer' }
+  },
+  
+  // {
+  //   name: 'CFE Históricos',
+  //   url: '/mod/cfe/historicos',
+  //   iconComponent: { name: 'cil-history' }
+  // }
   // {
   //   name: 'matTable',
   //   url: '/mod/home',

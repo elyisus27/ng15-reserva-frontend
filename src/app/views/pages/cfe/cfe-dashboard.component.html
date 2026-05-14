@@ -1,0 +1,119 @@
+<div class="container-fluid cfe-dashboard">
+
+  <!-- Filtros -->
+  <c-card class="filters-card">
+    <c-card-body class="filters-bar">
+      <div class="date-field">
+        <label for="dt1">Desde</label>
+        <input id="dt1" type="date" [(ngModel)]="dt1" />
+      </div>
+      <div class="date-field">
+        <label for="dt2">Hasta</label>
+        <input id="dt2" type="date" [(ngModel)]="dt2" />
+      </div>
+      <button class="reload-btn"
+              (click)="reloadChart()"
+              [disabled]="isLoadingContracts">
+        {{ isLoadingContracts ? 'Cargando...' : 'Actualizar' }}
+      </button>
+      <div class="metric-toggle">
+        <button class="metric-btn" [class.active]="metric === 'kwh'" (click)="setMetric('kwh')">kWh</button>
+        <button class="metric-btn" [class.active]="metric === 'pesos'" (click)="setMetric('pesos')">$ Pesos</button>
+      </div>
+      <span class="date-hint">Histórico por rango</span>
+      <span class="date-hint loading" *ngIf="isLoadingContracts">Cargando contratos...</span>
+      <span class="date-error" *ngIf="contractsError">{{ contractsError }}</span>
+    </c-card-body>
+  </c-card>
+
+  <!-- Bimestrales -->
+  <c-card class="chart-card">
+    <c-card-header class="card-header-row">
+      <strong>Recibos bimestrales</strong>
+      <c-badge color="info">{{ bimonthlyContracts.length }} contratos</c-badge>
+    </c-card-header>
+    <c-card-body class="chart-card-body">
+      <c-row class="g-2 h-100">
+
+        <c-col lg="8" class="col-canvas">
+          <div class="chart-placeholder">
+            <canvas #bimonthlyCanvas width="700" height="260"></canvas>
+          </div>
+        </c-col>
+
+        <c-col lg="4" class="col-selector">
+          <div class="selector-panel">
+            <div class="selector-header">
+              <span class="selector-label">Mostrar en gráfico</span>
+              <label class="toggle-all">
+                <input type="checkbox"
+                       [checked]="allBimonthlyChecked"
+                       (change)="toggleAllBimonthly($event)" />
+                <span>Todos</span>
+              </label>
+            </div>
+            <div class="chips-grid">
+              <label class="chip"
+                     *ngFor="let contract of bimonthlyContracts; trackBy: trackByContractId">
+                <input type="checkbox"
+                       [(ngModel)]="contract.checked"
+                       (change)="onCheckboxChange()" />
+                <span class="chip-inner">
+                  <strong>{{ contract.id }} · {{ contract.street }}</strong>
+                  <small>{{ contract.serviceNumber }}</small>
+                </span>
+              </label>
+            </div>
+          </div>
+        </c-col>
+
+      </c-row>
+    </c-card-body>
+  </c-card>
+
+  <!-- Mensuales -->
+  <c-card class="chart-card">
+    <c-card-header class="card-header-row">
+      <strong>Recibos mensuales</strong>
+      <c-badge color="success">{{ monthlyContracts.length }} contratos</c-badge>
+    </c-card-header>
+    <c-card-body class="chart-card-body">
+      <c-row class="g-2 h-100">
+
+        <c-col lg="8" class="col-canvas">
+          <div class="chart-placeholder">
+            <canvas #monthlyCanvas width="700" height="260"></canvas>
+          </div>
+        </c-col>
+
+        <c-col lg="4" class="col-selector">
+          <div class="selector-panel selector-panel--monthly">
+            <div class="selector-header">
+              <span class="selector-label">Mostrar en gráfico</span>
+              <label class="toggle-all">
+                <input type="checkbox"
+                       [checked]="allMonthlyChecked"
+                       (change)="toggleAllMonthly($event)" />
+                <span>Todos</span>
+              </label>
+            </div>
+            <div class="monthly-list">
+              <label class="monthly-row"
+                     *ngFor="let contract of monthlyContracts; trackBy: trackByContractId">
+                <input type="checkbox"
+                       [(ngModel)]="contract.checked"
+                       (change)="onCheckboxChange()" />
+                <span>
+                  <strong>{{ contract.id }} · {{ contract.street }}</strong>
+                  <small>{{ contract.serviceNumber }}</small>
+                </span>
+              </label>
+            </div>
+          </div>
+        </c-col>
+
+      </c-row>
+    </c-card-body>
+  </c-card>
+
+</div>

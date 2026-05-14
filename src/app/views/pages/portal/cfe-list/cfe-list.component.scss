@@ -1,0 +1,87 @@
+:host {
+  display: block;
+}
+
+.cfe-receipts-report {
+  max-width: 100%;
+}
+
+.cfe-report-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cfe-eyebrow {
+  margin: 0 0 0.25rem;
+  color: var(--cui-secondary-color, #768192);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.cfe-title {
+  margin: 0;
+  font-size: 1.65rem;
+  line-height: 1.15;
+}
+
+.cfe-description {
+  margin: 0.35rem 0 0;
+  color: var(--cui-secondary-color, #768192);
+}
+
+.cfe-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.cfe-actions .btn {
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+:host ::ng-deep smart-datatable .table th,
+:host ::ng-deep smart-datatable .table td {
+  padding: 0.35rem 0.5rem;
+  line-height: 1.2;
+}
+
+:host ::ng-deep smart-datatable .table td.col-street {
+  font-weight: 600;
+}
+
+:host ::ng-deep smart-datatable .table td.col-total {
+  font-weight: 700;
+}
+
+@media (max-width: 575.98px) {
+  .cfe-report-header {
+    display: block;
+  }
+
+  .cfe-title {
+    font-size: 1.35rem;
+  }
+
+  .cfe-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 0.85rem;
+  }
+
+  .cfe-actions .btn {
+    width: 100%;
+    min-height: 2.65rem;
+  }
+
+  :host ::ng-deep smart-datatable .table td.col-street,
+  :host ::ng-deep smart-datatable .table td.col-total {
+    font-size: 1rem;
+  }
+}
